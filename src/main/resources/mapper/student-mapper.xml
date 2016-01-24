@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace用于java代码调用时识别指定xml的mapper文件 -->
+<mapper namespace="com.irelint.mybatis.dao.StudengDao">
+    <resultMap id="stu" type="com.irelint.mybatis.model.Student">
+
+    </resultMap>
+    <select id="select"  resultMap="stu">
+        SELECT * FROM student
+    </select>
+   <!-- <sql id="field">
+        id,name,age
+    </sql>
+    <select id="getAllWorker" resultType="Worker">
+        select
+        <include refid="field" />
+        from worker
+    </select>
+    <select id="getWorkerById" resultType="Worker">
+        select
+        <include refid="field" />
+        from worker where
+        id= #{id}
+    </select>
+    <select id="getWorkerByName" resultType="Worker">
+        select
+        <include refid="field" />
+        from worker where name like '%'||#{name}||'%'
+    </select>
+
+    <insert id="addWorker">
+        insert into worker (
+        <include refid="field" />
+        ) values(#{id},#{name},#{age})
+    </insert>
+
+    <update id="updateWorker">
+        update worker set name=#{name} ,age=#{age} where
+        id=#{id}
+    </update>
+
+    <delete id="deleteWorkerById">
+        delete from worker where id=#{id};
+    </delete>-->
+</mapper>  

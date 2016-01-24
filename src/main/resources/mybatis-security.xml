@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  - Sample namespace-based configuration
+  -
+  -->
+
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<global-method-security pre-post-annotations="enabled" />
+
+	<http pattern="/static/**" security="none"/>
+
+	<http>
+		<intercept-url pattern="/login" access="permitAll" />
+		<intercept-url pattern="/loginError" access="permitAll" />
+		<intercept-url pattern="/**" access="isAuthenticated()" />
+		<form-login login-page="/login" authentication-failure-url="/loginError"
+				default-target-url="/home" always-use-default-target="true"/>
+		<logout logout-url="/logout" delete-cookies="JSESSIONID" logout-success-url="/login" />
+		<csrf disabled="true" />
+		<remember-me />
+	</http>
+
+	<beans:bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+		<beans:constructor-arg value="4"/>
+	</beans:bean>
+	<beans:bean id="studentDetailsService" class="com.irelint.mybatis.security.StudentDetailsService"/>
+	<authentication-manager>
+		<authentication-provider user-service-ref="studentDetailsService">
+			<password-encoder ref="passwordEncoder"/>
+		</authentication-provider>
+	</authentication-manager>
+
+</beans:beans>
