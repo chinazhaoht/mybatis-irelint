@@ -164,6 +164,11 @@
       <version>1.9</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.apache.zookeeper</groupId>
+      <artifactId>zookeeper</artifactId>
+      <version>3.4.6</version>
+    </dependency>
 
     <!-- security begin -->
     <dependency>
